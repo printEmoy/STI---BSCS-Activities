@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+class Employee {
+	
+	String name;
+	
+	public void setName(String newEmployeeName) {
+		name = newEmployeeName;
+	}
+	
+	public String getName() {
+		
+		return name;
+	}
+	
+}
+
+class FullTimeEmployee extends Employee{
+	
+	double monthlySalary;
+	
+	public void setMonthlySalary(double newMonthlySalary) {
+		monthlySalary = newMonthlySalary;
+	}
+	
+	public double getMonthlySalary() {
+		return monthlySalary;
+	}
+	
+}
+
+class PartTimeEmployee extends Employee {
+	
+	double ratePerHour, wage;
+	int hoursWorked;
+	
+	public void setWage(double newRatePerHour, int newHoursWorked ) {
+		ratePerHour = newRatePerHour;
+		hoursWorked = newHoursWorked;
+		wage = ratePerHour * hoursWorked;
+	}
+	
+	public double getWage() {
+		return wage;
+	}
+	
+}
+
+public class RunEmployee {
+
+	public static void main(String[] args) {
+		
+		Scanner s = new Scanner(System.in);
+		
+		while (true) {
+			System.out.println("Enter name: ");
+			String name = s.nextLine();
+			System.out.println("Press F for Full Time of P for Part Time Employee");
+			char choice = s.next().charAt(0);
+			
+			if (choice == 'P') {
+				System.out.println("Enter rate per hour and number of hours worked separated by space: ");
+				double ratePerHour = s.nextDouble();
+				int hoursWorked = s.nextInt();
+				
+				PartTimeEmployee pte = new PartTimeEmployee();
+				pte.setName(name);
+				pte.setWage(ratePerHour, hoursWorked);
+				
+				System.out.println("Name: " + name);
+				System.out.println("Wage : " + pte.getWage());
+				
+			} else if (choice == 'F') {
+				System.out.println("Enter Salary: ");
+				double salary = s.nextDouble();
+				
+				FullTimeEmployee fte = new FullTimeEmployee();
+				fte.setName(name);
+				
+				System.out.println("Name: " + name);
+				System.out.println("Salary: " + salary);
+				
+			}else {
+				System.out.println("Enter P or F only!");
+			}
+			
+			System.out.print("Do you want to enter another employee? (Y/N): ");
+	        char again = s.next().toUpperCase().charAt(0);
+	        if (again != 'Y') {
+	            break;
+	        }
+		}
+	}
+}
