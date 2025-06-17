@@ -1,0 +1,56 @@
+import java.util.InputMismatchException;
+import java.util.*;
+
+public class LabExer5A {
+	
+	public static void main(String[] args) {
+		
+		Random random = new Random();
+		Scanner s = new Scanner(System.in);
+		
+		int number = random.nextInt(50)+1;
+		int attemps = 0;
+		
+		System.out.println("Choose a number between 1 - 50");
+		
+		while(true) {
+			
+			try {
+				
+				System.out.println("Enter your guess:");
+				int guess = s.nextInt();
+				attemps++;
+				
+				if(guess < 0 ||guess > 50) {
+					
+					throw new IllegalArgumentException("Number is out of range\n");
+				}
+				
+				if(guess == number) {
+					
+					System.out.println("Correct!");
+					System.out.println("Number of attempts: " + attemps);
+					break;
+					
+				} else if(guess > number) {
+					
+					System.out.println("Too high! Try Again!\n");
+					
+				} else {
+					
+					System.out.println("Too low! Try Again!\n");
+				}
+				
+				}catch (InputMismatchException ex) {
+					
+					System.out.println("Invalid input. Please enter a number.\n");
+					 s.nextLine();
+					 
+				} catch (IllegalArgumentException ex) {
+					
+					System.out.println(ex.getMessage());
+					
+				}
+		}
+	}
+}
